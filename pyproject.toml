@@ -1,0 +1,77 @@
+[project]
+authors = [{name = "smknaake", email = "bas.knaake@deltares.nl"}]
+description = "Add a short description here"
+name = "geosections"
+requires-python = ">= 3.11"
+version = "0.1.0"
+dependencies = [
+    "geost",
+    "geopandas",
+    "pandas",
+    "matplotlib",
+    "rioxarray",
+    "typer",
+    "pillow",
+    "scikit-learn",
+]
+
+[project.scripts]
+geosections = "geosections.cli:app"
+
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
+
+[tool.pixi.project]
+channels = ["conda-forge"]
+platforms = ["win-64"]
+
+[tool.pixi.pypi-dependencies]
+geosections = { path = ".", editable = true }
+
+[tool.pixi.tasks]
+
+[tool.pixi.dependencies]
+python = "*"
+pip = "*"
+pydantic = "*"
+geopandas = "*"
+pandas = "*"
+numpy = "*"
+matplotlib = "*"
+rioxarray = "*"
+xarray = "*"
+ruff = "*"
+black = "*"
+pytest = "*"
+pytest-cov = "*"
+typer = "*"
+pillow = "*"
+scikit-learn = "*"
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+]
+markers = [
+	"unittest: test of single component",
+	"integrationtest: test of multiple components",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+  "pragma: no cover",
+]
+
+[tool.black]
+line-length = 88
+
+[tool.ruff]
+line-length = 88
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["F", "E", "W", "N", "I001", "NPY201"]
+ignore = ["F401", "E501", "F811"]
+unfixable = ["F401"]
+pydocstyle.convention = "numpy"
