@@ -3,7 +3,7 @@ import tomllib
 import typer
 from matplotlib import pyplot as plt
 
-from .read import read_config
+from geosections import read
 
 app = typer.Typer()
 
@@ -32,6 +32,13 @@ def plot(
 def check_unique_lithologies(
     config: str = typer.Argument(..., help="Pad naar TOML-configuratiebestand")
 ):
-    config = read_config(config)
+    config = read.read_config(config)
+    line = read.read_line(config.line)
+    boreholes = read.read_boreholes(config.data.boreholes, line)
+    cpts = read.read_cpts(config.data.cpts, line)
 
-
+    uniques = set(boreholes.data["lith"]) | set(cpts.data["lith"])
+    typer.secho(
+        f"Unique lithologies in boreholes: {uniques}",
+        fg=typer.colors.BLUE,
+    )

@@ -1,6 +1,7 @@
 import geost
 import numpy as np
 import pandas as pd
+from sklearn.preprocessing import MinMaxScaler
 
 type BoreholeCollection = geost.base.BoreholeCollection
 type CptCollection = geost.base.CptCollection
@@ -78,3 +79,28 @@ def label_consecutive_elements(array: np.ndarray) -> np.ndarray:
     """
     diff = np.diff(array, prepend=array[0])
     return np.cumsum(diff != 0)
+
+
+def distance_on_line(collection, line):
+    return line.project(collection.header["geometry"])
+
+
+def get_cpt_curves_for_section(cpt_data, nrs, line, dist_scale_factor=80):
+    cpt_curves = cpt_data.get(nrs)
+    cpt_curves.header["dist"] = line.project(cpt_curves.header.gdf["geometry"])
+
+    scaler = MinMaxScaler()
+    cpt_curves.data["qc"] = (
+        scaler.fit_transform(cpt_curves.data["cone_resistance"].values.reshape(-1, 1))
+        * dist_scale_factor
+    )
+    cpt_curves.data["fs"] = (
+        scaler.fit_transform(cpt_curves.data["friction_ratio"].values.reshape(-1, 1))
+        * dist_scale_factor
+    )
+    cpt_curves.data["depth"] = cpt_curves.data["surface"] - cpt_curves.data["depth"]
+    cpt_curves.add_header_column_to_data("dist")
+    cpt_curves.data["fs"] *= -1
+    cpt_curves.data["qc"] += cpt_curves.data["dist"]
+    cpt_curves.data["fs"] += cpt_curves.data["dist"]
+    return cpt_curves
