@@ -707,17 +707,20 @@ packages:
 - pypi: .
   name: geosections
   version: 0.1.0
-  sha256: 73429fd354b1927f2f58d7b2b4433bffe9a61ea89313f10f47ceb691d8d8fffc
+  sha256: 1cd6c8f220689951d12473785ae460bd422b72ee2638eb0e2a3027d34c01acab
   requires_dist:
   - geost
   - geopandas
   - pandas
+  - numpy
   - matplotlib
   - rioxarray
   - typer
   - pillow
   - scikit-learn
-  requires_python: '>=3.11'
+  - shapely
+  - xarray
+  requires_python: '>=3.12'
   editable: true
 - pypi: https://files.pythonhosted.org/packages/31/62/8cd8011d5cac98199e5b131308e8a24e3982db53f4561c188c3c76e58680/geost-0.2.8-py3-none-any.whl
   name: geost

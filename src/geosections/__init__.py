@@ -1,1 +1,1 @@
-from .validation import Config
+from .base import Config

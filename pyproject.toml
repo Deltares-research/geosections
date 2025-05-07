@@ -1,18 +1,21 @@
 [project]
 authors = [{name = "smknaake", email = "bas.knaake@deltares.nl"}]
-description = "Add a short description here"
+description = "Simple command line tool to create geological cross-sections"
 name = "geosections"
-requires-python = ">= 3.11"
+requires-python = ">= 3.12"
 version = "0.1.0"
 dependencies = [
     "geost",
     "geopandas",
     "pandas",
+    "numpy",
     "matplotlib",
     "rioxarray",
     "typer",
     "pillow",
     "scikit-learn",
+    "shapely",
+    "xarray",
 ]
 
 [project.scripts]

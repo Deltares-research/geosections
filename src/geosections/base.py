@@ -11,8 +11,9 @@ class PlotLabels(BaseModel):
 
 
 class PlotSettings(BaseModel):
-    width: int = Field(default=11)
-    height: int = Field(default=7)
+    column_with: int | float = Field(default=20)
+    fig_width: int = Field(default=11)
+    fig_height: int = Field(default=7)
     inches: bool = Field(default=True)
     grid: bool = Field(default=True)
     dpi: int = Field(default=300)
@@ -44,6 +45,7 @@ class Line(BaseModel):
     file: str | Path
     crs: int = Field(default=28992)
     name: Any = Field(default=None)
+    name_column: str = Field(default="name")
 
 
 class Config(BaseModel):
@@ -53,12 +55,3 @@ class Config(BaseModel):
     labels: PlotLabels = Field(default=PlotLabels())
     settings: PlotSettings = Field(default=PlotSettings())
     colors: dict[str, str] = Field({"default": "#000000"})
-
-
-if __name__ == "__main__":
-    import tomllib
-    from pathlib import Path
-
-    with open("test.toml", "rb") as f:
-        data = tomllib.load(f)
-    print(data)
