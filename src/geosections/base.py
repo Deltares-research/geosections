@@ -17,6 +17,9 @@ class PlotSettings(BaseModel):
     inches: bool = Field(default=True)
     grid: bool = Field(default=True)
     dpi: int = Field(default=300)
+    tight_layout: bool = Field(default=True)
+    ymin: int | float = Field(default=None)
+    ymax: int | float = Field(default=None)
 
 
 class Surface(BaseModel):

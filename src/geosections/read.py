@@ -103,7 +103,24 @@ def read_cpts(data: base.Data, line: gmt.LineString) -> geost.base.BoreholeColle
 
 def read_surface(data: base.Surface, line: gmt.LineString) -> xr.DataArray:
     surface = rio.open_rasterio(data.file, masked=True).squeeze(drop=True)
-    if surface.rio.crs is None or surface.rio.crs != 28992:
-        surface = surface.rio.reproject(28992)
+    # if surface.rio.crs is None or surface.rio.crs != 28992:
+    #     surface = surface.rio.reproject(28992)
     surface = geost.models.model_utils.sample_along_line(surface, line, dist=2.5)
     return surface
+
+
+def read_curves(config: base.Config, line: gmt.LineString) -> geost.base.CptCollection:
+    curves = geost.read_cpt_table(
+        config.data.cpts.file, horizontal_reference=config.data.cpts.crs
+    )
+
+    if curves.horizontal_reference != 28992:
+        curves.change_horizontal_reference(28992)
+
+    curves = utils.get_cpt_curves_for_section(
+        curves,
+        config.data.curves.nrs,
+        line,
+        dist_scale_factor=config.data.curves.dist_scale_factor,
+    )
+    return curves
