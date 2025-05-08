@@ -1956,7 +1956,7 @@ packages:
 - pypi: .
   name: geosections
   version: 0.1.0
-  sha256: dba9a9e487f065dab2467551dbdb5494744775c6540422a6ebc25c1512694ff3
+  sha256: 227e0f4da83f2e340b61817d25ad27027320ed46b384c098c99a1d20e3b8b165
   requires_dist:
   - geopandas
   - geost
@@ -1964,6 +1964,7 @@ packages:
   - numpy
   - pandas
   - pillow
+  - pydantic
   - rioxarray
   - scikit-learn
   - shapely
