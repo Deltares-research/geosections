@@ -103,8 +103,16 @@ def read_cpts(data: base.Data, line: gmt.LineString) -> geost.base.BoreholeColle
 
 def read_surface(data: base.Surface, line: gmt.LineString) -> xr.DataArray:
     surface = rio.open_rasterio(data.file, masked=True).squeeze(drop=True)
-    # if surface.rio.crs is None or surface.rio.crs != 28992:
-    #     surface = surface.rio.reproject(28992)
+
+    if surface.rio.crs is None:
+        warning = (
+            f"Surface {Path(data.file).stem} has no CRS, surface may not be shown correctly "
+            "along the cross-section line."
+        )
+        typer.secho(warning, fg=typer.colors.YELLOW)
+    elif surface.rio.crs != 28992:
+        surface = surface.rio.reproject(28992)
+
     surface = geost.models.model_utils.sample_along_line(surface, line, dist=2.5)
     return surface
 

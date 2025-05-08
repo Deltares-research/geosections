@@ -1,5 +1,3 @@
-import tomllib
-
 import typer
 from matplotlib import pyplot as plt
 
@@ -12,7 +10,7 @@ app = typer.Typer()
 def plot(
     config: str = typer.Argument(..., help="Path to TOML-configuration file"),
     output_file: str = typer.Option(None, "--save", help="Path to output file"),
-    show: bool = typer.Option(True, "--dont-show", help="Do not show plot"),
+    close: bool = typer.Option(False, "--close", help="Close plot"),
 ):
     config = read.read_config(config)
     line = read.read_line(config.line)
@@ -56,9 +54,10 @@ def plot(
     if output_file:
         fig.savefig(output_file)
 
-    if show:
+    if close:
+        plt.close()
+    else:
         plt.show()
-    plt.close()
 
 
 @app.command()

@@ -133,3 +133,5 @@ ENV/
 # VS-Code
 *.code-workspace
 
+# For testing purpose of package
+test.toml
