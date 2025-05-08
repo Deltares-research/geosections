@@ -9,6 +9,18 @@
 Simple command line tool to create geological cross-sections from borehole and CPT data
 using `.toml` configuration files.
 
+## Installation
+
+Install the latest release by:
+```powershell
+pip install geosections
+```
+
+Or the latest (experimental) version of the main branch directly from GitHub using:
+```powershell
+pip install git+https://github.com/Deltares-research/geosections.git
+```
+
 
 ## Usage
 
