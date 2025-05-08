@@ -3,7 +3,9 @@ authors = [{name = "smknaake", email = "bas.knaake@deltares.nl"}]
 description = "Simple command line tool to create geological cross-sections"
 name = "geosections"
 requires-python = ">= 3.12"
-version = "0.1.0"
+dynamic = ["version"]
+readme = "README.md"
+license = {file = "LICENSE"}
 dependencies = [
     "geost",
     "geopandas",
@@ -18,6 +20,11 @@ dependencies = [
     "xarray",
 ]
 
+[project.urls]
+Homepage = "https://github.com/Deltares-research/geosections"
+Repository = "https://github.com/Deltares-research/geosections"
+Issues = "https://github.com/Deltares-research/geosections/issues"
+
 [project.scripts]
 geosections = "geosections.cli:app"
 
@@ -25,9 +32,15 @@ geosections = "geosections.cli:app"
 build-backend = "hatchling.build"
 requires = ["hatchling"]
 
+[tool.hatch.version]
+path = "src/geosections/__init__.py"
+
+[tool.hatch.build.targets.sdist]
+only-include = ["src/geosections", "tests"]
+
 [tool.pixi.project]
 channels = ["conda-forge"]
-platforms = ["win-64"]
+platforms = ["win-64", "linux-64", "osx-64", "osx-arm64"]
 
 [tool.pixi.pypi-dependencies]
 geosections = { path = ".", editable = true }
