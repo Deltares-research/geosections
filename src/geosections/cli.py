@@ -21,12 +21,20 @@ def plot(
     )
 
     if config.data.boreholes is not None:
+        typer.secho(
+            f"Plotting boreholes from {config.data.boreholes.file}",
+            fg=typer.colors.BLUE,
+        )
         boreholes = read.read_boreholes(config.data.boreholes, line)
         plotting.plot_borehole_data(
             ax, boreholes, config.colors, config.settings.column_with
         )
 
     if config.data.cpts is not None:
+        typer.secho(
+            f"Plotting CPTs from {config.data.cpts.file}",
+            fg=typer.colors.BLUE,
+        )
         cpts = read.read_cpts(config.data.cpts, line)
         plotting.plot_borehole_data(
             ax, cpts, config.colors, config.settings.column_with
@@ -41,11 +49,19 @@ def plot(
     ax.grid(config.settings.grid, linestyle="--", alpha=0.5)
 
     if config.data.curves is not None:
+        typer.secho(
+            f"Plotting curves from {config.data.curves.nrs}",
+            fg=typer.colors.BLUE,
+        )
         curves = read.read_curves(config, line)
         plotting.plot_curves(ax, curves, ymax)
 
     if config.surface:
         for surface in config.surface:
+            typer.secho(
+                f"Plotting surface from {surface.file}",
+                fg=typer.colors.BLUE,
+            )
             surface_line = read.read_surface(surface, line)
             ax.plot(
                 surface_line["dist"].values, surface_line.values, **surface.style_kwds

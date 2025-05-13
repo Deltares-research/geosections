@@ -1,4 +1,5 @@
 import tomllib
+import warnings
 from pathlib import Path
 
 import geopandas as gpd
@@ -6,9 +7,12 @@ import geost
 import rioxarray as rio
 import typer
 import xarray as xr
+from geost.validate.validate import ValidationWarning
 from shapely import geometry as gmt
 
 from geosections import base, utils
+
+warnings.filterwarnings("ignore", category=ValidationWarning)
 
 
 def _geopandas_read(file: str | Path, **kwargs) -> gpd.GeoDataFrame:
