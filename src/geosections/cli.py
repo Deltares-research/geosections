@@ -1,7 +1,7 @@
 import typer
 from matplotlib import pyplot as plt
 
-from geosections import plotting, read
+from geosections import plotting, read, utils
 
 app = typer.Typer()
 
@@ -22,7 +22,7 @@ def plot(
 
     if config.data.boreholes is not None:
         typer.secho(
-            f"Plotting boreholes from {config.data.boreholes.file}",
+            f"Plotting boreholes from {utils.get_filename(config.data.boreholes.file)}",
             fg=typer.colors.BLUE,
         )
         boreholes = read.read_boreholes(config.data.boreholes, line)
@@ -32,7 +32,7 @@ def plot(
 
     if config.data.cpts is not None:
         typer.secho(
-            f"Plotting CPTs from {config.data.cpts.file}",
+            f"Plotting CPTs from {utils.get_filename(config.data.cpts.file)}",
             fg=typer.colors.BLUE,
         )
         cpts = read.read_cpts(config.data.cpts, line)
@@ -59,7 +59,7 @@ def plot(
     if config.surface:
         for surface in config.surface:
             typer.secho(
-                f"Plotting surface from {surface.file}",
+                f"Plotting surface from {utils.get_filename(surface.file)}",
                 fg=typer.colors.BLUE,
             )
             surface_line = read.read_surface(surface, line)
@@ -90,3 +90,9 @@ def check_unique_lithologies(
         f"Unique lithologies in boreholes: {uniques}",
         fg=typer.colors.BLUE,
     )
+
+
+if __name__ == "__main__":
+    plot("test.toml", None, True)
+    app()
+    print(2)

@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import geost
 import numpy as np
 import pandas as pd
@@ -104,3 +106,21 @@ def get_cpt_curves_for_section(cpt_data, nrs, line, dist_scale_factor=80):
     cpt_curves.data["qc"] += cpt_curves.data["dist"]
     cpt_curves.data["fs"] += cpt_curves.data["dist"]
     return cpt_curves
+
+
+def get_filename(filepath: str) -> str:
+    """
+    Filter the filename with extension from a full filepath-like string.
+
+    Parameters:
+    -----------
+    filepath : str
+        Filepath to filter the filename from.
+
+    Returns:
+    --------
+    str
+        Filename with extension.
+
+    """
+    return Path(filepath).name

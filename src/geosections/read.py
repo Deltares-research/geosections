@@ -8,11 +8,13 @@ import rioxarray as rio
 import typer
 import xarray as xr
 from geost.validate.validate import ValidationWarning
+from pandas.errors import SettingWithCopyWarning
 from shapely import geometry as gmt
 
 from geosections import base, utils
 
 warnings.filterwarnings("ignore", category=ValidationWarning)
+warnings.filterwarnings("ignore", category=SettingWithCopyWarning)
 
 
 def _geopandas_read(file: str | Path, **kwargs) -> gpd.GeoDataFrame:
@@ -93,7 +95,7 @@ def read_cpts(data: base.Data, line: gmt.LineString) -> geost.base.BoreholeColle
         cpts.change_horizontal_reference(28992)
 
     cpts = utils.cpts_to_borehole_collection(
-        cpts.select_with_lines(line, buffer=30),
+        cpts.select_with_lines(line, buffer=data.max_distance_to_line),
         {
             "depth": ["min", "max"],
             "lith": "first",
