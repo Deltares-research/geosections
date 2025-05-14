@@ -62,6 +62,7 @@ platforms = ["win-64", "linux-64", "osx-64", "osx-arm64"]
 geosections = { path = ".", editable = true }
 
 [tool.pixi.tasks]
+build-docs = "sphinx-build -b html docs ./docs/build"
 
 [tool.pixi.dependencies]
 python = "*"
@@ -81,6 +82,11 @@ typer = "*"
 pillow = "*"
 scikit-learn = "*"
 click = "<8.2"
+sphinx = "*"
+myst-parser = "*"
+pydata-sphinx-theme = "*"
+sphinx-design = "*"
+myst-nb = "*"
 
 [tool.pytest.ini_options]
 testpaths = [
