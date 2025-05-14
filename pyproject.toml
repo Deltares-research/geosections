@@ -33,6 +33,7 @@ dependencies = [
     "scikit-learn",
     "shapely",
     "xarray",
+    "click<8.2",
 ]
 
 [project.urls]
@@ -79,6 +80,7 @@ pytest-cov = "*"
 typer = "*"
 pillow = "*"
 scikit-learn = "*"
+click = "<8.2"
 
 [tool.pytest.ini_options]
 testpaths = [
