@@ -29,7 +29,7 @@ def cpts_as_top_bottom(
     cpts: CptCollection, aggfuncs: dict, layer_col: str
 ) -> pd.DataFrame:
     data = cpts.data.df.copy()
-    data["layer"] = create_layer_numbers(cpts, layer_col)
+    data["layer"] = create_layer_numbers(data, layer_col)
 
     cpts_as_top_bot = pd.pivot_table(
         data,
@@ -52,16 +52,12 @@ def _get_columns(aggfuncs: dict):
                 yield f"{key}_{v}"
 
 
-def create_layer_numbers(collection: Collection, layer_col: str) -> pd.Series:
-    return (
-        collection.data.df.groupby("nr")
-        .apply(
-            lambda x: label_consecutive_elements(x[layer_col].values),
-            include_groups=False,
-        )
-        .explode()
-        .values
-    )
+def create_layer_numbers(df: pd.DataFrame, layer_col: str) -> pd.Series:
+    grouped = df.groupby("nr")
+    numbers = pd.Series(index=df.index)
+    for _, group in grouped:
+        numbers.loc[group.index] = label_consecutive_elements(group[layer_col].values)
+    return numbers
 
 
 def label_consecutive_elements(array: np.ndarray) -> np.ndarray:
@@ -124,3 +120,36 @@ def get_filename(filepath: str) -> str:
 
     """
     return Path(filepath).name
+
+
+def concat(collection: Collection, other: Collection, **pd_kwargs) -> Collection:
+    """
+    Concatenate two `geost.base.Collection` instances.
+
+    Parameters:
+    -----------
+    collection : `geost.base.Collection`
+        The first collection to concatenate.
+    other : `geost.base.Collection`
+        The second collection to concatenate.
+    **pd_kwargs
+        Additional keyword arguments to pass to `pd.concat`.
+
+    Returns:
+    --------
+    `geost.base.Collection`
+        The concatenated collection.
+
+    """
+    if other.horizontal_reference != collection.horizontal_reference:
+        other.change_horizontal_reference(collection.horizontal_reference)
+
+    if other.vertical_reference != collection.vertical_reference:
+        other.change_vertical_reference(collection.vertical_reference)
+
+    collection.header.gdf = pd.concat(
+        [collection.header.gdf, other.header.gdf], **pd_kwargs
+    )
+    collection.data.df = pd.concat([collection.data.df, other.data.df], **pd_kwargs)
+
+    return collection

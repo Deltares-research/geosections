@@ -36,7 +36,8 @@ class PlotSettings(BaseModel):
     fig_height : int | float
         Height of the figure in inches or centimeters.
     inches : bool
-        If True, fig_width and fig_height are in inches. If False, they are in centimeters.
+        If True, fig_width and fig_height are given in inches. If False, they are in given
+        in centimeters.
     grid : bool
         If True, a grid is drawn in the background of the cross-section.
     dpi : int
@@ -91,11 +92,15 @@ class Data(BaseModel):
         boreholes or CPTs that are within this distance to the line.
     crs : int
         Coordinate reference system of the borehole or CPT data. Default is 28992 (RD New).
+    additional_nrs : list[str]
+        List of additional borehole or CPT numbers to plot in the cross-section. For example,
+        to plot boreholes or CPTs that are outside the maximum distance to the line.
     """
 
     file: str
     max_distance_to_line: int | float = Field(default=50)
     crs: int = Field(default=28992)
+    additional_nrs: list[str] = Field(default=[])
 
 
 class Curves(BaseModel):
