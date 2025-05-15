@@ -63,6 +63,8 @@ geosections = { path = ".", editable = true }
 
 [tool.pixi.tasks]
 build-docs = "sphinx-build -b html docs ./docs/build"
+rm-build = "rm -r ./docs/build"
+rebuild-docs = { depends-on = ["rm-build", "build-docs"] }
 
 [tool.pixi.dependencies]
 python = "*"

@@ -1,4 +1,5 @@
 # Geosections (experimental)
+
 [![PyPI version](https://img.shields.io/pypi/v/geosections.svg)](https://pypi.org/project/geosections)
 [![License: MIT](https://img.shields.io/pypi/l/imod)](https://choosealicense.com/licenses/mit)
 [![Lifecycle: experimental](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)](https://lifecycle.r-lib.org/articles/stages.html)
@@ -12,15 +13,16 @@ using `.toml` configuration files.
 ## Installation
 
 Install the latest release by:
+
 ```powershell
 pip install geosections
 ```
 
 Or the latest (experimental) version of the main branch directly from GitHub using:
+
 ```powershell
 pip install git+https://github.com/Deltares-research/geosections.git
 ```
-
 
 ## Usage
 
@@ -58,6 +60,7 @@ V = "brown"
 ```
 
 Next, create the cross-section by:
+
 ```powershell
 geosections plot my_settings.toml --save "my-section.png"
 ```
