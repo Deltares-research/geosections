@@ -1,7 +1,20 @@
-def plot_borehole_data(ax, data, colors, width=20):
+def plot_borehole_data(ax, data, colors, label, width=20):
     for nr, dist in zip(data.header["nr"], data.header["dist"]):
         c = data.data[data.data["nr"] == nr]
         plot_borehole(ax, c, dist, width, colors)
+
+        # Label the borehole if labelling is enabled
+        if label:
+            ax.text(
+                dist,
+                1.03,
+                nr.replace("000000", ""),
+                rotation=90,
+                ha="center",
+                va="bottom",
+                fontsize=8,
+                transform=ax.get_xaxis_transform(),
+            )
     return
 
 
@@ -15,18 +28,9 @@ def plot_borehole(ax, df, dist, width, colors):
     return
 
 
-def plot_curves(ax, curves, ymax):
+def plot_curves(ax, curves):
     for nr in curves.header["nr"]:
         c = curves.get(nr)
         ax.plot(c.data["qc"], c.data["depth"], color="r", linewidth=0.5)
         ax.plot(c.data["fs"], c.data["depth"], color="b", linewidth=0.5)
-        ax.text(
-            c.header["dist"],
-            ymax + 2,
-            nr.replace("000000", ""),
-            rotation=90,
-            ha="center",
-            va="bottom",
-            fontsize=8,
-        )
     return

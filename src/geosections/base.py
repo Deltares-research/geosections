@@ -101,6 +101,7 @@ class Data(BaseModel):
     max_distance_to_line: int | float = Field(default=50)
     crs: int = Field(default=28992)
     additional_nrs: list[str] = Field(default=[])
+    label: bool = Field(default=True)
 
 
 class Curves(BaseModel):

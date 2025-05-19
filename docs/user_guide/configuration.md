@@ -33,6 +33,7 @@ name_column = "name"
 file = "./boreholes.parquet"                    # Also accepts .csv file
 max_distance_to_line = 120
 additional_nrs = ['B48B0396', 'B48B0398']
+label = false                                   # Disable text labels
 ```
 
 ## CPT data
@@ -43,6 +44,7 @@ file = "./cpt_data.parquet"                     # Also accepts .csv file
 max_distance_to_line = 30
 crs = 4258
 additional_nrs = ['CPT000000244400']
+label = true
 ```
 
 ## CPT curves

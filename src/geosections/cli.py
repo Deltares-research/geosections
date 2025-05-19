@@ -37,7 +37,11 @@ def plot(
         )
         boreholes = read.read_boreholes(config.data.boreholes, line)
         plotting.plot_borehole_data(
-            ax, boreholes, config.colors, config.settings.column_with
+            ax,
+            boreholes,
+            config.colors,
+            config.data.boreholes.label,
+            config.settings.column_with,
         )
 
     if config.data.cpts is not None:
@@ -46,7 +50,11 @@ def plot(
         )
         cpts = read.read_cpts(config.data.cpts, line)
         plotting.plot_borehole_data(
-            ax, cpts, config.colors, config.settings.column_with
+            ax,
+            cpts,
+            config.colors,
+            config.data.cpts.label,
+            config.settings.column_with,
         )
 
     ymin, ymax = ax.get_ylim()
@@ -60,7 +68,7 @@ def plot(
     if config.data.curves is not None:
         print(f"Plotting curves from [blue]{config.data.curves.nrs}[/blue]")
         curves = read.read_curves(config, line)
-        plotting.plot_curves(ax, curves, ymax)
+        plotting.plot_curves(ax, curves)
 
     if config.surface:
         for surface in config.surface:

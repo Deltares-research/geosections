@@ -12,11 +12,13 @@ crs = 28992
 file = "c:/Users/knaake/OneDrive - Stichting Deltares/Documents/data/dino/dino_boringen.parquet"
 max_distance_to_line = 120
 crs = 28992
+label = false
 
 [data.cpts]
 file = "n:/Projects/11209500/11209639/C. Report - advise/Geological site evaluation Sloehaven/ondergronddata/cpt_data.parquet"
 max_distance_to_line = 30
 crs = 4258
+label = true
 
 [data.curves]
 nrs = ["a"]
