@@ -123,6 +123,7 @@ class Curves(BaseModel):
 
     nrs: list[str]
     dist_scale_factor: int | float = Field(default=80)
+    label: bool = Field(default=False)
 
 
 class PlotData(BaseModel):

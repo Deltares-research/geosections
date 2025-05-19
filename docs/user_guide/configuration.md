@@ -44,7 +44,7 @@ file = "./cpt_data.parquet"                     # Also accepts .csv file
 max_distance_to_line = 30
 crs = 4258
 additional_nrs = ['CPT000000244400']
-label = true
+label = false                                   # Disable text labels
 ```
 
 ## CPT curves
@@ -56,6 +56,7 @@ nrs = [
     "CPT000000008329",
 ]
 dist_scale_factor = 80
+label = true                                    # Enable labels (default false for curves)
 ```
 
 ## Plot surfaces
