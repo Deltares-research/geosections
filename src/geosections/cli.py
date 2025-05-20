@@ -57,14 +57,6 @@ def plot(
             config.settings.column_with,
         )
 
-    ymin, ymax = ax.get_ylim()
-    ax.set_ylim(ymin - 2, ymax)
-    ax.set_xlim(0, line.length)
-    ax.set_xlabel(config.labels.xlabel)
-    ax.set_ylabel(config.labels.ylabel)
-    ax.set_title(config.labels.title)
-    ax.grid(config.settings.grid, linestyle="--", alpha=0.5)
-
     if config.data.curves is not None:
         print(f"Plotting curves from [blue]{config.data.curves.nrs}[/blue]")
         curves = read.read_curves(config, line)
@@ -79,6 +71,20 @@ def plot(
             ax.plot(
                 surface_line["dist"].values, surface_line.values, **surface.style_kwds
             )
+
+    ymin, ymax = ax.get_ylim()
+    ymin = ymin if config.settings.ymin is None else config.settings.ymin
+    ymax = ymax if config.settings.ymax is None else config.settings.ymax
+
+    xmin = 0 if config.settings.xmin is None else config.settings.xmin
+    xmax = line.length if config.settings.xmax is None else config.settings.xmax
+
+    ax.set_ylim(ymin, ymax)
+    ax.set_xlim(xmin, xmax)
+    ax.set_xlabel(config.labels.xlabel)
+    ax.set_ylabel(config.labels.ylabel)
+    ax.set_title(config.labels.title)
+    ax.grid(config.settings.grid, linestyle="--", alpha=0.5)
 
     if output_file:
         fig.savefig(output_file)
@@ -108,4 +114,5 @@ def check_unique_lithologies(
 
 
 if __name__ == "__main__":
+    plot("test.toml", None, False)
     app()

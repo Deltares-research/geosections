@@ -37,7 +37,7 @@ def plot_curves(ax, curves, label):
 def plot_label(ax, label, dist):
     ax.text(
         dist,
-        1.03,
+        1.01,
         re.sub(r"0{5,}", "", label),
         rotation=90,
         ha="center",

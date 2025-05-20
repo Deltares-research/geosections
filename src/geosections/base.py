@@ -48,6 +48,10 @@ class PlotSettings(BaseModel):
         Minimum depth of the cross-section.
     ymax : int | float
         Maximum depth of the cross-section.
+    xmin : int | float
+        Minimum distance of the cross-section.
+    xmax : int | float
+        Maximum distance of the cross-section.
     """
 
     column_with: int | float = Field(default=20)
@@ -59,6 +63,8 @@ class PlotSettings(BaseModel):
     tight_layout: bool = Field(default=True)
     ymin: int | float = Field(default=None)
     ymax: int | float = Field(default=None)
+    xmin: int | float = Field(default=None)
+    xmax: int | float = Field(default=None)
 
 
 class Surface(BaseModel):

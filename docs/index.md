@@ -22,4 +22,5 @@ hidden:
 
 Home <self>
 User guide <user_guide>
+Changelog <changelog>
 ```
