@@ -1,10 +1,12 @@
 # Changelog
 
-## v0.1.x
+## v0.1.4
 
 **Changes**
 - **Added** Option to specify xmin, xmax and ymin, ymax bounds for sections.
-- **Updated** Decreased transform bounds of data labels. 
+- **Added** Option to show label ids of plotted data.
+
+- **Updated** Use Regex expression to filter redundant zeros in CPT ids.
 
 ## v0.1.3
 
