@@ -211,16 +211,15 @@ def read_surface(data: base.Surface, line: gmt.LineString) -> xr.DataArray:
     return surface
 
 
-def read_curves(config: base.Config, line: gmt.LineString) -> geost.base.CptCollection:
+def read_curves(data: base.Curves, line: gmt.LineString) -> geost.base.CptCollection:
     """
     Read the CPT data for the curves that will be plotted in the cross-section and scale
     the cone resistance and friction ratio values to the distance of the cross-section line.
 
     Parameters
     ----------
-    config : :class:`~geosections.base.Config`
-        `Config` object containing the configuration for the cross-section with the necessary
-        data.
+    config : :class:`~geosections.base.Curves`
+        `Curves` object containing the CPT data to plot the curves for in the cross-section.
     line : gmt.LineString
         Shapely LineString for the cross-section.
 
@@ -231,17 +230,15 @@ def read_curves(config: base.Config, line: gmt.LineString) -> geost.base.CptColl
         cross-section with the cone resistance and friction ratio data scaled to the
         cross-section line distance.
     """
-    curves = geost.read_cpt_table(
-        config.data.cpts.file, horizontal_reference=config.data.cpts.crs
-    )
+    curves = geost.read_cpt_table(data.file, horizontal_reference=data.crs)
 
     if curves.horizontal_reference != 28992:
         curves.change_horizontal_reference(28992)
 
     curves = utils.get_cpt_curves_for_section(
         curves,
-        config.data.curves.nrs,
+        data.nrs,
         line,
-        dist_scale_factor=config.data.curves.dist_scale_factor,
+        dist_scale_factor=data.dist_scale_factor,
     )
     return curves

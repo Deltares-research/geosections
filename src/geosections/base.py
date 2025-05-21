@@ -117,6 +117,8 @@ class Curves(BaseModel):
 
     Parameters
     ----------
+    file : str
+        Filepath-like string (e.g. my-file.parquet, my-file.csv) to plot the curves from.
     nrs : list[str]
         List of CPT numbers to plot the CPT curves for in the cross-section.
     dist_scale_factor : int | float
@@ -127,6 +129,8 @@ class Curves(BaseModel):
         `x scaled * dist_scale_factor`.
     """
 
+    file: str
+    crs: int = Field(default=28992)
     nrs: list[str]
     dist_scale_factor: int | float = Field(default=80)
     label: bool = Field(default=False)

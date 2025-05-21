@@ -59,7 +59,7 @@ def plot(
 
     if config.data.curves is not None:
         print(f"Plotting curves from [blue]{config.data.curves.nrs}[/blue]")
-        curves = read.read_curves(config, line)
+        curves = read.read_curves(config.data.curves, line)
         plotting.plot_curves(ax, curves, config.data.curves.label)
 
     if config.surface:
@@ -114,5 +114,4 @@ def check_unique_lithologies(
 
 
 if __name__ == "__main__":
-    plot("test.toml", None, False)
     app()
