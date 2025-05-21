@@ -51,6 +51,8 @@ label = false                                   # Disable text labels
 
 ```toml
 [data.curves]
+file = "./cpt_data.parquet"                     # Also accepts .csv file
+crs = 4258
 nrs = [
     "CPT000000050791",
     "CPT000000008329",
