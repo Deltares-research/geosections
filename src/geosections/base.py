@@ -1,4 +1,3 @@
-from pathlib import Path
 from typing import Any
 
 from pydantic import BaseModel, Field
@@ -29,7 +28,7 @@ class PlotSettings(BaseModel):
 
     Parameters
     ----------
-    column_with : int | float
+    column_width : int | float
         Width of the borehole columns in the cross-section in meters.
     fig_width : int | float
         Width of the figure in inches or centimeters.
@@ -54,7 +53,7 @@ class PlotSettings(BaseModel):
         Maximum distance of the cross-section.
     """
 
-    column_with: int | float = Field(default=20)
+    column_width: int | float = Field(default=20)
     fig_width: int | float = Field(default=11)
     fig_height: int | float = Field(default=7)
     inches: bool = Field(default=True)
@@ -173,7 +172,7 @@ class Line(BaseModel):
         "name". If the column is not found, the first line in the file is used.
     """
 
-    file: str | Path
+    file: str
     crs: int = Field(default=28992)
     name: Any = Field(default=None)
     name_column: str = Field(default="name")

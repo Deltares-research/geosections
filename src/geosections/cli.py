@@ -41,7 +41,7 @@ def plot(
             boreholes,
             config.colors,
             config.data.boreholes.label,
-            config.settings.column_with,
+            config.settings.column_width,
         )
 
     if config.data.cpts is not None:
@@ -54,7 +54,7 @@ def plot(
             cpts,
             config.colors,
             config.data.cpts.label,
-            config.settings.column_with,
+            config.settings.column_width,
         )
 
     if config.data.curves is not None:

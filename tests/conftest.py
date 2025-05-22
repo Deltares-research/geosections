@@ -204,7 +204,7 @@ def test_line_file(tmp_path, test_line):
         crs=28992,
     )
     gdf.to_parquet(outfile)
-    return outfile
+    return str(outfile)
 
 
 @pytest.fixture
@@ -223,4 +223,4 @@ def test_surface(tmp_path):
     )
     da.rio.write_crs(28992, inplace=True)
     da.rio.to_raster(outfile)
-    return outfile
+    return str(outfile)
