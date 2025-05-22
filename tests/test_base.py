@@ -36,6 +36,8 @@ def non_default_curves_input():
         "dist_scale_factor": 100,
         "nrs": ["A", "B"],
         "label": True,
+        "qc_max": 100,
+        "fs_max": 100,
     }
 
 
@@ -121,6 +123,8 @@ class TestCurves:
         assert data.dist_scale_factor == 80
         assert data.nrs == ["A", "B"]
         assert not data.label
+        assert data.qc_max is None
+        assert data.fs_max is None
 
     @pytest.mark.unittest
     def test_initialize_with_non_default_input(self, non_default_curves_input):
@@ -130,6 +134,8 @@ class TestCurves:
         assert data.dist_scale_factor == 100
         assert data.nrs == ["A", "B"]
         assert data.label
+        assert data.qc_max == 100
+        assert data.fs_max == 100
 
     @pytest.mark.unittest
     def test_initialize_invalid_input(self):
@@ -141,12 +147,16 @@ class TestCurves:
                     "dist_scale_factor": "invalid",
                     "nrs": "invalid",
                     "label": "invalid",
+                    "qc_max": "invalid",
+                    "fs_max": "invalid",
                 }
             )
             assert "crs" in str(e.value)
             assert "dist_scale_factor" in str(e.value)
             assert "nrs" in str(e.value)
             assert "label" in str(e.value)
+            assert "qc_max" in str(e.value)
+            assert "fs_max" in str(e.value)
 
 
 class TestLine:
@@ -331,6 +341,8 @@ class TestConfig:
         assert config.data.curves.dist_scale_factor == 100
         assert config.data.curves.nrs == ["A", "B"]
         assert config.data.curves.label
+        assert config.data.curves.qc_max == 100
+        assert config.data.curves.fs_max == 100
         assert config.surface[0].file.name == "test_surface.tif"
         assert config.surface[0].style_kwds == {"color": "red", "alpha": 0.5}
         assert config.settings.column_width == 30

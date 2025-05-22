@@ -30,7 +30,6 @@ dependencies = [
     "rioxarray",
     "typer",
     "pillow",
-    "scikit-learn",
     "shapely",
     "xarray",
     "click<8.2",
@@ -62,6 +61,10 @@ platforms = ["win-64", "linux-64", "osx-64", "osx-arm64"]
 geosections = { path = ".", editable = true }
 
 [tool.pixi.tasks]
+test = "python -m pytest --verbose --cov=geosections --cov-report xml --cov-report term"
+test-local = "pytest -v --cov"
+format = "black ."
+lint = "ruff check --fix ./geosections"
 build-docs = "sphinx-build -b html docs ./docs/build"
 rm-build = "rm -r ./docs/build"
 rebuild-docs = { depends-on = ["rm-build", "build-docs"] }
@@ -82,13 +85,23 @@ pytest = "*"
 pytest-cov = "*"
 typer = "*"
 pillow = "*"
-scikit-learn = "*"
 click = "<8.2"
 sphinx = "*"
 myst-parser = "*"
 pydata-sphinx-theme = "*"
 sphinx-design = "*"
 myst-nb = "*"
+
+[tool.pixi.feature.py312.dependencies]
+python = "3.12.*"
+
+[tool.pixi.feature.py313.dependencies]
+python = "3.13.*"
+
+[tool.pixi.environments]
+default = { features = ["py313"], solve-group = "py313" }
+py312 = { features = ["py312"], solve-group = "py312" }
+py313 = { features = ["py313"], solve-group = "py313" }
 
 [tool.pytest.ini_options]
 testpaths = [

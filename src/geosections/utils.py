@@ -3,11 +3,34 @@ from pathlib import Path
 import geost
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import MinMaxScaler
 
 type BoreholeCollection = geost.base.BoreholeCollection
 type CptCollection = geost.base.CptCollection
 type Collection = geost.base.Collection
+
+
+def min_max_scaler(array, max_: int | float = None):
+    """
+    Scale values in array between 0 and 1 using min-max scaling.
+
+    Parameters
+    ----------
+    array : array-like
+        The array to scale.
+    max_ : int | float, optional
+        Optional max_ to use. The default is None, then the max_ is determined from the
+        array.
+
+    Returns
+    -------
+    array-like
+        The scaled array.
+
+    """
+    if max_ is None:
+        max_ = array.max()
+    min_ = array.min()
+    return (array - min_) / (max_ - min_)
 
 
 def cpts_to_borehole_collection(
@@ -92,17 +115,18 @@ def distance_on_line(collection, line):
     return line.project(collection.header["geometry"])
 
 
-def get_cpt_curves_for_section(cpt_data, nrs, line, dist_scale_factor=80):
+def get_cpt_curves_for_section(
+    cpt_data, nrs, line, dist_scale_factor=80, qc_max=None, fs_max=None
+):
     cpt_curves = cpt_data.get(nrs)
     cpt_curves.header["dist"] = line.project(cpt_curves.header.gdf["geometry"])
 
-    scaler = MinMaxScaler()
     cpt_curves.data["qc"] = (
-        scaler.fit_transform(cpt_curves.data["cone_resistance"].values.reshape(-1, 1))
+        min_max_scaler(cpt_curves.data["cone_resistance"].values, qc_max)
         * dist_scale_factor
     )
     cpt_curves.data["fs"] = (
-        scaler.fit_transform(cpt_curves.data["friction_ratio"].values.reshape(-1, 1))
+        min_max_scaler(cpt_curves.data["friction_ratio"].values, fs_max)
         * dist_scale_factor
     )
     cpt_curves.data["depth"] = cpt_curves.data["surface"] - cpt_curves.data["depth"]

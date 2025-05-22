@@ -267,5 +267,7 @@ def read_curves(data: base.Curves, line: gmt.LineString) -> geost.base.CptCollec
         data.nrs,
         line,
         dist_scale_factor=data.dist_scale_factor,
+        qc_max=data.qc_max,
+        fs_max=data.fs_max,
     )
     return curves
