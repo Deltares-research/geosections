@@ -64,7 +64,7 @@ geosections = { path = ".", editable = true }
 test = "python -m pytest --verbose --cov=geosections --cov-report xml --cov-report term"
 test-local = "pytest -v --cov"
 format = "black ."
-lint = "ruff check --fix ./geosections"
+lint = "ruff check --fix ./src/geosections"
 build-docs = "sphinx-build -b html docs ./docs/build"
 rm-build = "rm -r ./docs/build"
 rebuild-docs = { depends-on = ["rm-build", "build-docs"] }

@@ -4918,7 +4918,7 @@ packages:
 - pypi: .
   name: geosections
   version: 0.1.4
-  sha256: 6d14dbb67ab9971e5d8b8f940c47704b196ee182b1fc02822cb8200631ffd089
+  sha256: 416732b345ffa82510fd7c82cf4d8d7a5f54fd341fd7cae47533ad2f74778db2
   requires_dist:
   - click<8.2
   - geopandas

@@ -23,9 +23,9 @@ def test_debug_app():
     command_name = "plot"
     args = [
         command_name,
-        r"n:\Projects\11209500\11209639\C. Report - advise\Geological site evaluation Eemshaven\Figures\geosections_settings\gs_e3_nwzo.toml",
+        r"n:\Projects\11209500\11209639\C. Report - advise\Geological site evaluation Eemshaven\Figures\geosections_settings\gs_e3_zn.toml",
         "--save",
-        r"n:\Projects\11209500\11209639\C. Report - advise\Geological site evaluation Eemshaven\Figures\gs_e3_nwzo.png",
+        r"n:\Projects\11209500\11209639\C. Report - advise\Geological site evaluation Eemshaven\Figures\gs_e3_zn.pdf",
     ]
 
     result = runner.invoke(app, args)
