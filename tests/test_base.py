@@ -78,7 +78,8 @@ class TestData:
     @pytest.mark.unittest
     def test_initialize(self):
         data = base.Data(**{"file": "test_borehole_data.parquet"})
-        assert Path(data.file).name == "test_borehole_data.parquet"
+        assert isinstance(data.file, Path)
+        assert data.file.name == "test_borehole_data.parquet"
         assert data.crs == 28992
         assert data.max_distance_to_line == 50
         assert not data.additional_nrs
@@ -87,7 +88,7 @@ class TestData:
     @pytest.mark.unittest
     def test_initialize_with_non_default_input(self, non_default_borehole_input):
         data = base.Data(**non_default_borehole_input)
-        assert Path(data.file).name == "test_borehole_data.parquet"
+        assert data.file.name == "test_borehole_data.parquet"
         assert data.crs == 4326
         assert data.max_distance_to_line == 100
         assert data.additional_nrs == ["A", "B"]
@@ -114,7 +115,8 @@ class TestCurves:
     @pytest.mark.unittest
     def test_initialize(self):
         data = base.Curves(**{"file": "test_cpt_data.parquet", "nrs": ["A", "B"]})
-        assert Path(data.file).name == "test_cpt_data.parquet"
+        assert isinstance(data.file, Path)
+        assert data.file.name == "test_cpt_data.parquet"
         assert data.crs == 28992
         assert data.dist_scale_factor == 80
         assert data.nrs == ["A", "B"]
@@ -123,7 +125,7 @@ class TestCurves:
     @pytest.mark.unittest
     def test_initialize_with_non_default_input(self, non_default_curves_input):
         data = base.Curves(**non_default_curves_input)
-        assert Path(data.file).name == "test_cpt_data.parquet"
+        assert data.file.name == "test_cpt_data.parquet"
         assert data.crs == 4326
         assert data.dist_scale_factor == 100
         assert data.nrs == ["A", "B"]
@@ -151,7 +153,8 @@ class TestLine:
     @pytest.mark.unittest
     def test_initialize(self):
         data = base.Line(**{"file": "test_line.geoparquet"})
-        assert Path(data.file).name == "test_line.geoparquet"
+        assert isinstance(data.file, Path)
+        assert data.file.name == "test_line.geoparquet"
         assert data.crs == 28992
         assert data.name is None
         assert data.name_column == "name"
@@ -159,7 +162,7 @@ class TestLine:
     @pytest.mark.unittest
     def test_initialize_with_non_default_input(self, non_default_line_input):
         data = base.Line(**non_default_line_input)
-        assert Path(data.file).name == "test_line.geoparquet"
+        assert data.file.name == "test_line.geoparquet"
         assert data.crs == 4326
         assert data.name == "test_line"
         assert data.name_column == "test_name"
@@ -180,13 +183,14 @@ class TestSurface:
     @pytest.mark.unittest
     def test_initialize(self):
         data = base.Surface(**{"file": "test_surface.tif"})
-        assert Path(data.file).name == "test_surface.tif"
+        assert isinstance(data.file, Path)
+        assert data.file.name == "test_surface.tif"
         assert not data.style_kwds
 
     @pytest.mark.unittest
     def test_initialize_with_non_default_input(self, non_default_surface_input):
         data = base.Surface(**non_default_surface_input)
-        assert Path(data.file).name == "test_surface.tif"
+        assert data.file.name == "test_surface.tif"
         assert data.style_kwds == {"color": "red", "alpha": 0.5}
 
     @pytest.mark.unittest
@@ -308,26 +312,26 @@ class TestConfig:
     @pytest.mark.unittest
     def test_initialize_all_input(self, all_input):
         config = base.Config(**all_input)
-        assert config.line.file == "test_line.geoparquet"
+        assert config.line.file.name == "test_line.geoparquet"
         assert config.line.crs == 4326
         assert config.line.name == "test_line"
         assert config.line.name_column == "test_name"
-        assert config.data.boreholes.file == "test_borehole_data.parquet"
+        assert config.data.boreholes.file.name == "test_borehole_data.parquet"
         assert config.data.boreholes.max_distance_to_line == 100
         assert config.data.boreholes.crs == 4326
         assert config.data.boreholes.additional_nrs == ["A", "B"]
         assert not config.data.boreholes.label
-        assert config.data.cpts.file == "test_cpt_data.parquet"
+        assert config.data.cpts.file.name == "test_cpt_data.parquet"
         assert config.data.cpts.max_distance_to_line == 100
         assert config.data.cpts.crs == 4326
         assert config.data.cpts.additional_nrs == ["A", "B"]
         assert not config.data.cpts.label
-        assert config.data.curves.file == "test_cpt_data.parquet"
+        assert config.data.curves.file.name == "test_cpt_data.parquet"
         assert config.data.curves.crs == 4326
         assert config.data.curves.dist_scale_factor == 100
         assert config.data.curves.nrs == ["A", "B"]
         assert config.data.curves.label
-        assert config.surface[0].file == "test_surface.tif"
+        assert config.surface[0].file.name == "test_surface.tif"
         assert config.surface[0].style_kwds == {"color": "red", "alpha": 0.5}
         assert config.settings.column_width == 30
         assert config.settings.fig_width == 15

@@ -1,3 +1,4 @@
+from pathlib import Path
 from typing import Any
 
 from pydantic import BaseModel, Field
@@ -79,7 +80,7 @@ class Surface(BaseModel):
         `matplotlib.pyplot.plot`. For example, `{"color": "red", "linestyle": "--"}`.
     """
 
-    file: str
+    file: Path
     style_kwds: dict[str, Any] = Field(default={})
 
 
@@ -102,7 +103,7 @@ class Data(BaseModel):
         to plot boreholes or CPTs that are outside the maximum distance to the line.
     """
 
-    file: str
+    file: Path
     max_distance_to_line: int | float = Field(default=50)
     crs: int = Field(default=28992)
     additional_nrs: list[str] = Field(default=[])
@@ -128,7 +129,7 @@ class Curves(BaseModel):
         `x scaled * dist_scale_factor`.
     """
 
-    file: str
+    file: Path
     crs: int = Field(default=28992)
     nrs: list[str]
     dist_scale_factor: int | float = Field(default=80)
@@ -172,7 +173,7 @@ class Line(BaseModel):
         "name". If the column is not found, the first line in the file is used.
     """
 
-    file: str
+    file: Path
     crs: int = Field(default=28992)
     name: Any = Field(default=None)
     name_column: str = Field(default="name")

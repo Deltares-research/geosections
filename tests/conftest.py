@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import pytest
 import rioxarray as rio
+import toml
 import xarray as xr
 from shapely import geometry as gmt
 
@@ -224,3 +225,22 @@ def test_surface(tmp_path):
     da.rio.write_crs(28992, inplace=True)
     da.rio.to_raster(outfile)
     return str(outfile)
+
+
+@pytest.fixture
+def configuration_toml(tmp_path, test_line_file, borehole_data, cpt_data, test_surface):
+    config = {
+        "line": {"file": test_line_file},
+        "data": {
+            "boreholes": {"file": borehole_data},
+            "cpts": {"file": cpt_data},
+            "curves": {"file": cpt_data, "nrs": ["a"], "dist_scale_factor": 0.2},
+        },
+        "surface": [{"file": test_surface}],
+        "labels": {"xlabel": "x", "ylabel": "y"},
+        "colors": {"K": "#175118", "V": "#714425", "Z": "#EACE1E"},
+    }
+    outfile = tmp_path / "test.toml"
+    with open(outfile, "w") as f:
+        toml.dump(config, f)
+    return outfile
