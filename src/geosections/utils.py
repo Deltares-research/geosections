@@ -39,10 +39,13 @@ def cpts_as_top_bottom(
     )
 
     # Add the difference between the next min and current max to cpts_as_top_bot['depth']['max']
-    depth_gap = cpts_as_top_bot.groupby(level=0, group_keys=False).apply(
-        lambda x: x["depth"]["min"].shift(-1) - x["depth"]["max"]
-    ).ffill().values
-    cpts_as_top_bot[('depth', 'max')] += depth_gap
+    depth_gap = (
+        cpts_as_top_bot.groupby(level=0, group_keys=False)
+        .apply(lambda x: x["depth"]["min"].shift(-1) - x["depth"]["max"])
+        .ffill()
+        .values
+    )
+    cpts_as_top_bot[("depth", "max")] += depth_gap
 
     cpts_as_top_bot.columns = _get_columns(aggfuncs)
     cpts_as_top_bot.reset_index(inplace=True)
