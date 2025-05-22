@@ -232,6 +232,7 @@ def test_surface(tmp_path):
 @pytest.fixture
 def configuration_toml(tmp_path, test_line_file, borehole_data, cpt_data, test_surface):
     config = {
+        "settings": {"column_width": 0.15},
         "line": {"file": test_line_file},
         "data": {
             "boreholes": {"file": borehole_data, "max_distance_to_line": 1.5},
