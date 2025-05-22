@@ -96,6 +96,49 @@ def read_line(data: base.Line) -> gmt.LineString:
     return line
 
 
+def _select_line_data(
+    data: geost.base.Collection,
+    line: gmt.LineString,
+    distance: int | float,
+    additional_nrs: list[str] | None = None,
+) -> geost.base.Collection:
+    """
+    Helper function to select data in a `geost.base.Collection` (or subclass) instance
+    along a line within a specified distance and add optional additional data to the
+    resulting `Collection` object.
+
+    Parameters
+    ----------
+    data : geost.base.Collection
+        `Collection` instance to select data from.
+    line : gmt.LineString
+        Shapely `LineString` instance to select data along.
+    distance : int | float
+        Maximum distance from the line to select data within.
+    additional_nrs : list[str] | None, optional
+        Optional additional data to select. The default is None.
+
+    Returns
+    -------
+    geost.base.Collection
+        `Collection` of the selected data along the line.
+
+    """
+    if additional_nrs is None:
+        additional_nrs = []
+
+    if data.horizontal_reference != 28992:
+        data.change_horizontal_reference(28992)
+
+    data_on_line = data.select_with_lines(line, buffer=distance)
+
+    if additional_nrs:
+        additional = data.get(additional_nrs)
+        data_on_line = utils.concat(data_on_line, additional, ignore_index=True)
+
+    return data_on_line
+
+
 def read_boreholes(
     data: base.Data, line: gmt.LineString
 ) -> geost.base.BoreholeCollection:
@@ -119,18 +162,11 @@ def read_boreholes(
 
     """
     boreholes = geost.read_borehole_table(data.file, horizontal_reference=data.crs)
-
-    if boreholes.horizontal_reference != 28992:
-        boreholes.change_horizontal_reference(28992)
-
-    boreholes_line = boreholes.select_with_lines(line, buffer=data.max_distance_to_line)
-
-    if data.additional_nrs:
-        additional = boreholes.get(data.additional_nrs)
-        boreholes_line = utils.concat(boreholes_line, additional, ignore_index=True)
-
-    boreholes_line.header["dist"] = utils.distance_on_line(boreholes_line, line)
-    return boreholes_line
+    boreholes = _select_line_data(
+        boreholes, line, data.max_distance_to_line, data.additional_nrs
+    )
+    boreholes.header["dist"] = utils.distance_on_line(boreholes, line)
+    return boreholes
 
 
 def read_cpts(data: base.Data, line: gmt.LineString) -> geost.base.BoreholeCollection:
@@ -154,27 +190,18 @@ def read_cpts(data: base.Data, line: gmt.LineString) -> geost.base.BoreholeColle
 
     """
     cpts = geost.read_cpt_table(data.file, horizontal_reference=data.crs)
-
-    if cpts.horizontal_reference != 28992:
-        cpts.change_horizontal_reference(28992)
-
-    cpts_line = cpts.select_with_lines(line, buffer=data.max_distance_to_line)
-
-    if data.additional_nrs:
-        additional = cpts.get(data.additional_nrs)
-        cpts_line = utils.concat(cpts_line, additional)
-
-    cpts_line = utils.cpts_to_borehole_collection(
-        cpts_line,
+    cpts = _select_line_data(cpts, line, data.max_distance_to_line, data.additional_nrs)
+    cpts = utils.cpts_to_borehole_collection(
+        cpts,
         {
             "depth": ["min", "max"],
             "lith": "first",
         },
     )
-    cpts_line.header["dist"] = utils.distance_on_line(cpts_line, line)
-    cpts_line.add_header_column_to_data("surface")
-    cpts_line.add_header_column_to_data("end")
-    return cpts_line
+    cpts.header["dist"] = utils.distance_on_line(cpts, line)
+    cpts.add_header_column_to_data("surface")
+    cpts.add_header_column_to_data("end")
+    return cpts
 
 
 def read_surface(data: base.Surface, line: gmt.LineString) -> xr.DataArray:

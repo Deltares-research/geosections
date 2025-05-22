@@ -7,6 +7,8 @@ import toml
 import xarray as xr
 from shapely import geometry as gmt
 
+from geosections.read import read_config
+
 
 def borehole_a():
     nlayers = 5
@@ -127,8 +129,8 @@ def cpt_a():
             "surface": np.repeat(surface, 10),
             "end": np.repeat(end, 10),
             "depth": depth,
-            "qc": qc,
-            "fs": fs,
+            "cone_resistance": qc,
+            "friction_ratio": fs,
             "lith": lith,
         }
     )
@@ -153,8 +155,8 @@ def cpt_b():
             "surface": np.repeat(surface, 10),
             "end": np.repeat(end, 10),
             "depth": depth,
-            "qc": qc,
-            "fs": fs,
+            "cone_resistance": qc,
+            "friction_ratio": fs,
             "lith": lith,
         }
     )
@@ -232,8 +234,8 @@ def configuration_toml(tmp_path, test_line_file, borehole_data, cpt_data, test_s
     config = {
         "line": {"file": test_line_file},
         "data": {
-            "boreholes": {"file": borehole_data},
-            "cpts": {"file": cpt_data},
+            "boreholes": {"file": borehole_data, "max_distance_to_line": 1.5},
+            "cpts": {"file": cpt_data, "max_distance_to_line": 1.5},
             "curves": {"file": cpt_data, "nrs": ["a"], "dist_scale_factor": 0.2},
         },
         "surface": [{"file": test_surface}],
@@ -244,3 +246,8 @@ def configuration_toml(tmp_path, test_line_file, borehole_data, cpt_data, test_s
     with open(outfile, "w") as f:
         toml.dump(config, f)
     return outfile
+
+
+@pytest.fixture
+def config(configuration_toml):
+    return read_config(configuration_toml)
