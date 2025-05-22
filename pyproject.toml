@@ -71,6 +71,7 @@ rebuild-docs = { depends-on = ["rm-build", "build-docs"] }
 
 [tool.pixi.dependencies]
 python = "*"
+importlib-metadata = "<8.7.0"
 pip = "*"
 pydantic = "*"
 geopandas = "*"
