@@ -4,7 +4,10 @@ html_theme.sidebar_secondary.remove:
 
 # Geosections
 
-This page is a work in progress.
+Simple command line tool to create geological cross-sections from borehole and CPT data
+using `.toml` configuration files.
+
+(This page is a work in progress.)
 
 ## Package status
 

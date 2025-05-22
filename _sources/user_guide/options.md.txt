@@ -1,3 +1,3 @@
 # Configuration options
 
-This explains the available options
+This explains the available options.
