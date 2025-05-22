@@ -101,13 +101,16 @@ class Data(BaseModel):
     additional_nrs : list[str]
         List of additional borehole or CPT numbers to plot in the cross-section. For example,
         to plot boreholes or CPTs that are outside the maximum distance to the line.
+    label : bool
+        If True, the borehole or CPT numbers are plotted in the cross-section. If False,
+        no labels are plotted.
     """
 
     file: Path
     max_distance_to_line: int | float = Field(default=50)
     crs: int = Field(default=28992)
     additional_nrs: list[str] = Field(default=[])
-    label: bool = Field(default=True)
+    label: bool = Field(default=False)
 
 
 class Curves(BaseModel):
@@ -127,15 +130,24 @@ class Curves(BaseModel):
         meters using Scikit-learn's `MinMaxScaler` (see relevant documentation). The width
         of the each curve in the cross-section is calculated by:
         `x scaled * dist_scale_factor`.
+    qc_max : int | float
+        Maximum value of the cone resistance to use for scaling the data with distance. If
+        specified, the distance of this max value equals the `dist_scale_factor`.
+    fs_max : int | float
+        Maximum value of the friction ratio e to use for scaling the data with distance. If
+        specified, the distance of this max value equals the `dist_scale_factor`.
+    label : bool
+        If True, the CPT numbers are plotted in the cross-section. If False, no labels are
+        plotted.
     """
 
     file: Path
     crs: int = Field(default=28992)
     nrs: list[str]
     dist_scale_factor: int | float = Field(default=80)
-    label: bool = Field(default=False)
     qc_max: int | float = Field(default=None)
     fs_max: int | float = Field(default=None)
+    label: bool = Field(default=False)
 
 
 class PlotData(BaseModel):

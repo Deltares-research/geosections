@@ -13,7 +13,7 @@ def non_default_borehole_input():
         "max_distance_to_line": 100,
         "crs": 4326,
         "additional_nrs": ["A", "B"],
-        "label": False,
+        "label": True,
     }
 
 
@@ -24,7 +24,7 @@ def non_default_cpt_input():
         "max_distance_to_line": 100,
         "crs": 4326,
         "additional_nrs": ["A", "B"],
-        "label": False,
+        "label": True,
     }
 
 
@@ -85,7 +85,7 @@ class TestData:
         assert data.crs == 28992
         assert data.max_distance_to_line == 50
         assert not data.additional_nrs
-        assert data.label
+        assert not data.label
 
     @pytest.mark.unittest
     def test_initialize_with_non_default_input(self, non_default_borehole_input):
@@ -94,7 +94,7 @@ class TestData:
         assert data.crs == 4326
         assert data.max_distance_to_line == 100
         assert data.additional_nrs == ["A", "B"]
-        assert not data.label
+        assert data.label
 
     @pytest.mark.unittest
     def test_initialize_invalid_input(self):
@@ -330,12 +330,12 @@ class TestConfig:
         assert config.data.boreholes.max_distance_to_line == 100
         assert config.data.boreholes.crs == 4326
         assert config.data.boreholes.additional_nrs == ["A", "B"]
-        assert not config.data.boreholes.label
+        assert config.data.boreholes.label
         assert config.data.cpts.file.name == "test_cpt_data.parquet"
         assert config.data.cpts.max_distance_to_line == 100
         assert config.data.cpts.crs == 4326
         assert config.data.cpts.additional_nrs == ["A", "B"]
-        assert not config.data.cpts.label
+        assert config.data.cpts.label
         assert config.data.curves.file.name == "test_cpt_data.parquet"
         assert config.data.curves.crs == 4326
         assert config.data.curves.dist_scale_factor == 100
