@@ -28,8 +28,8 @@ def min_max_scaler(array, max_: int | float = None):
 
     """
     if max_ is None:
-        max_ = array.max()
-    min_ = array.min()
+        max_ = np.nanmax(array)
+    min_ = np.nanmin(array)
     return (array - min_) / (max_ - min_)
 
 
