@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.1.5
+
+[**Full Changelog**](https://github.com/Deltares-research/geosections/compare/0.1.4...0.1.5)
+
+**Changes**
+- **Added** Optional labelling for each data source. By default, labels are turned off.
+- **Added** Option to define the minimum and maximum cone resistance and friction ratio to scale data by.
+
+- **Updated** Add unit tests for `base` and `read` modules.
+
+- **Fixed** Fixed non-continuous layers in CPT data.
+
 ## v0.1.4
 
 **Changes**
@@ -10,7 +22,6 @@
 
 ## v0.1.3
 
-[**Full Changelog**](https://github.com/Deltares-research/geosections/compare/0.1.2...0.1.3)
 
 **Changes**
 

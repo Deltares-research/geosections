@@ -1,3 +1,3 @@
 from .base import Config
 
-__version__ = "0.1.4"
+__version__ = "0.1.5"
