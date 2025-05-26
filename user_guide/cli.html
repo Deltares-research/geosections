@@ -424,17 +424,17 @@ TOML file.</p>
 <h2>Check lithology in the data<a class="headerlink" href="#check-lithology-in-the-data" title="Link to this heading">#</a></h2>
 <p>A cross-section shows the lithologic composition of borehole and CPT data in specific colors per
 lithology. These colors are specified in the configuration TOML (see <a class="reference internal" href="configuration.html#lithology-colors"><span class="std std-ref">Colors</span></a>
-section). Therefore, <code class="docutils literal notranslate"><span class="pre">geosections</span></code> has a <code class="docutils literal notranslate"><span class="pre">check-unique-lithologies</span></code> function to check the present
+section). Therefore, <code class="docutils literal notranslate"><span class="pre">geosections</span></code> has a <code class="docutils literal notranslate"><span class="pre">unique-lithologies</span></code> function to check the present
 lithologic classes that are present in the data. Check each unique lithology code that is present
 in the data in the cross-section to configure a legend by:</p>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">geosections</span> <span class="n">check-unique-lithologies</span> <span class="n">my_settings</span><span class="p">.</span><span class="n">toml</span>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">geosections</span> <span class="n">unique-lithologies</span> <span class="s2">&quot;my_settings.toml&quot;</span>
 </pre></div>
 </div>
 </section>
 <section id="creating-a-cross-section">
 <h2>Creating a cross-section<a class="headerlink" href="#creating-a-cross-section" title="Link to this heading">#</a></h2>
 <p>Create a cross-section based on the TOML file by using:</p>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">geosections</span> <span class="n">plot</span> <span class="n">my_settings</span><span class="p">.</span><span class="n">toml</span>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">geosections</span> <span class="n">plot</span> <span class="s2">&quot;my_settings.toml&quot;</span>
 </pre></div>
 </div>
 <p>This opens a plot window for the cross-section for inspecting the result. When the result
@@ -442,11 +442,11 @@ is good enough, the section can directly be saved by clicking the save icon in t
 If the changes are required, simply close the plot window and type the same command.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">plot</span></code> function also has options available to directly save the section, or close the
 preview plot window. To directly save the plot to an output file use:</p>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">geosections</span> <span class="n">plot</span> <span class="n">my_settings</span><span class="p">.</span><span class="n">toml</span> <span class="p">-</span><span class="n">-save</span> <span class="s2">&quot;my-section.pdf&quot;</span>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">geosections</span> <span class="n">plot</span> <span class="s2">&quot;my_settings.toml&quot;</span> <span class="p">-</span><span class="n">-save</span> <span class="s2">&quot;my-section.pdf&quot;</span>
 </pre></div>
 </div>
 <p>Or directly save and do not show a preview:</p>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">geosections</span> <span class="n">plot</span> <span class="n">my_settings</span><span class="p">.</span><span class="n">toml</span> <span class="p">-</span><span class="n">-save</span> <span class="s2">&quot;my-section.pdf&quot;</span> <span class="p">-</span><span class="n">-close</span>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">geosections</span> <span class="n">plot</span> <span class="s2">&quot;my_settings.toml&quot;</span> <span class="p">-</span><span class="n">-save</span> <span class="s2">&quot;my-section.pdf&quot;</span> <span class="p">-</span><span class="n">-close</span>
 </pre></div>
 </div>
 </section>

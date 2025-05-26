@@ -11,12 +11,12 @@ TOML file.
 
 A cross-section shows the lithologic composition of borehole and CPT data in specific colors per
 lithology. These colors are specified in the configuration TOML (see [Colors](./configuration.md#lithology-colors)
-section). Therefore, `geosections` has a `check-unique-lithologies` function to check the present
+section). Therefore, `geosections` has a `unique-lithologies` function to check the present
 lithologic classes that are present in the data. Check each unique lithology code that is present
 in the data in the cross-section to configure a legend by:
 
 ```powershell
-geosections check-unique-lithologies my_settings.toml
+geosections unique-lithologies "my_settings.toml"
 ```
 
 ## Creating a cross-section
@@ -24,7 +24,7 @@ geosections check-unique-lithologies my_settings.toml
 Create a cross-section based on the TOML file by using:
 
 ```powershell
-geosections plot my_settings.toml
+geosections plot "my_settings.toml"
 ```
 
 This opens a plot window for the cross-section for inspecting the result. When the result
@@ -35,11 +35,11 @@ The `plot` function also has options available to directly save the section, or 
 preview plot window. To directly save the plot to an output file use:
 
 ```powershell
-geosections plot my_settings.toml --save "my-section.pdf"
+geosections plot "my_settings.toml" --save "my-section.pdf"
 ```
 
 Or directly save and do not show a preview:
 
 ```powershell
-geosections plot my_settings.toml --save "my-section.pdf" --close
+geosections plot "my_settings.toml" --save "my-section.pdf" --close
 ```
