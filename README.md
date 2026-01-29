@@ -33,8 +33,8 @@ AHN surface along a section line:
 ```toml
 [settings] # General plot settings
 column_width = 20 # Width of boreholes
-fig_width = 11
-fig_height = 7
+fig-width = 11 # Multiple words can be given as 'fig-width' or 'fig_width'
+fig-height = 7
 grid = true
 
 [line]
@@ -43,11 +43,11 @@ crs = 28992 # Geosections uses this crs as default
 
 [data.boreholes]
 file = "my_boreholes.parquet"
-max_distance_to_line = 50 # Meters
+max-distance-to-line = 50 # Meters
 
 [[surface]]
 file = "ahn_surface.tif"
-style_kwds = { color = "r", label = "AHN surface" } # Matplotlib keyword arguments
+style-kwds = { color = "r", label = "AHN surface" } # Matplotlib keyword arguments
 
 [labels]
 xlabel = "Distance (m)"

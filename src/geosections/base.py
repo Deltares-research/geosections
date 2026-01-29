@@ -1,7 +1,11 @@
 from pathlib import Path
 from typing import Any
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
+
+
+def _unify_dash_keys(s: str) -> str:
+    return s.replace("_", "-")
 
 
 class PlotLabels(BaseModel):
@@ -17,6 +21,8 @@ class PlotLabels(BaseModel):
     title : str
         Main title for the cross-section.
     """
+
+    model_config = ConfigDict(alias_generator=_unify_dash_keys, populate_by_name=True)
 
     xlabel: str = Field(default="")
     ylabel: str = Field(default="")
@@ -54,6 +60,8 @@ class PlotSettings(BaseModel):
         Maximum distance of the cross-section.
     """
 
+    model_config = ConfigDict(alias_generator=_unify_dash_keys, populate_by_name=True)
+
     column_width: int | float = Field(default=20)
     fig_width: int | float = Field(default=11)
     fig_height: int | float = Field(default=7)
@@ -80,6 +88,8 @@ class Surface(BaseModel):
         `matplotlib.pyplot.plot`. For example, `{"color": "red", "linestyle": "--"}`.
     """
 
+    model_config = ConfigDict(alias_generator=_unify_dash_keys, populate_by_name=True)
+
     file: Path
     style_kwds: dict[str, Any] = Field(default={})
 
@@ -105,6 +115,8 @@ class Data(BaseModel):
         If True, the borehole or CPT numbers are plotted in the cross-section. If False,
         no labels are plotted.
     """
+
+    model_config = ConfigDict(alias_generator=_unify_dash_keys, populate_by_name=True)
 
     file: Path
     max_distance_to_line: int | float = Field(default=50)
@@ -140,6 +152,8 @@ class Curves(BaseModel):
         If True, the CPT numbers are plotted in the cross-section. If False, no labels are
         plotted.
     """
+
+    model_config = ConfigDict(alias_generator=_unify_dash_keys, populate_by_name=True)
 
     file: Path
     crs: int = Field(default=28992)
@@ -186,6 +200,8 @@ class Line(BaseModel):
         Name of the attribute column to select the `name` parameter from. The default is
         "name". If the column is not found, the first line in the file is used.
     """
+
+    model_config = ConfigDict(alias_generator=_unify_dash_keys, populate_by_name=True)
 
     file: Path
     crs: int = Field(default=28992)

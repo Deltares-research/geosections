@@ -1,8 +1,6 @@
 import typer
 from rich import print
 
-from geosections import check, plotting
-
 app = typer.Typer()
 
 
@@ -17,6 +15,8 @@ def plot(
     file containing input data and plot settings.
 
     """
+    from geosections import plotting
+
     plotting.plot_cross_section(config, output_file, close)
 
 
@@ -29,6 +29,8 @@ def unique_lithologies(
     cross-section.
 
     """
+    from geosections import check
+
     uniques = check.check_lithology(config)
     print(f"Unique lithologies in boreholes: [yellow]{sorted(uniques)}[/yellow]\n")
 
