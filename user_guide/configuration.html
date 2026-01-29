@@ -52,7 +52,7 @@
     <link rel="prev" title="Command line tools" href="cli.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.1.5" />
+  <meta name="docsearch:version" content="0.1.6" />
   </head>
   
   
@@ -422,8 +422,8 @@ possible option in each section, see the <a class="reference internal" href="opt
 <h2>Settings<a class="headerlink" href="#settings" title="Link to this heading">#</a></h2>
 <div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[settings]</span>
 <span class="n">column_width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span>
-<span class="n">fig_width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">11</span>
-<span class="n">fig_height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span>
+<span class="n">fig-width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">11</span><span class="w"> </span><span class="c1"># Multiple words can be given as &#39;fig-width&#39; or &#39;fig_width&#39;</span>
+<span class="n">fig-height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span>
 <span class="n">inches</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 <span class="n">grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 </pre></div>
@@ -435,7 +435,7 @@ possible option in each section, see the <a class="reference internal" href="opt
 <span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;./cross_section_lines.geoparquet&quot;</span><span class="w">       </span><span class="c1"># Also accepts .shp files</span>
 <span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">28992</span>
 <span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;E-W&quot;</span>
-<span class="n">name_column</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;name&quot;</span>
+<span class="n">name-column</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;name&quot;</span>
 </pre></div>
 </div>
 </section>
@@ -443,8 +443,8 @@ possible option in each section, see the <a class="reference internal" href="opt
 <h2>Borehole data<a class="headerlink" href="#borehole-data" title="Link to this heading">#</a></h2>
 <div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[data.boreholes]</span>
 <span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;./boreholes.parquet&quot;</span><span class="w">                    </span><span class="c1"># Also accepts .csv file</span>
-<span class="n">max_distance_to_line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">120</span>
-<span class="n">additional_nrs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;B48B0396&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;B48B0398&#39;</span><span class="p">]</span>
+<span class="n">max-distance-to-line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">120</span>
+<span class="n">additional-nrs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;B48B0396&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;B48B0398&#39;</span><span class="p">]</span>
 <span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">                                   </span><span class="c1"># Disable text labels</span>
 </pre></div>
 </div>
@@ -453,9 +453,9 @@ possible option in each section, see the <a class="reference internal" href="opt
 <h2>CPT data<a class="headerlink" href="#cpt-data" title="Link to this heading">#</a></h2>
 <div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[data.cpts]</span>
 <span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;./cpt_data.parquet&quot;</span><span class="w">                     </span><span class="c1"># Also accepts .csv file</span>
-<span class="n">max_distance_to_line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span>
+<span class="n">max-distance-to-line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span>
 <span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4258</span>
-<span class="n">additional_nrs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;CPT000000244400&#39;</span><span class="p">]</span>
+<span class="n">additional-nrs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;CPT000000244400&#39;</span><span class="p">]</span>
 <span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">                                   </span><span class="c1"># Disable text labels</span>
 </pre></div>
 </div>
@@ -469,7 +469,7 @@ possible option in each section, see the <a class="reference internal" href="opt
 <span class="w">    </span><span class="s2">&quot;CPT000000050791&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="s2">&quot;CPT000000008329&quot;</span><span class="p">,</span>
 <span class="p">]</span>
-<span class="n">dist_scale_factor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">80</span>
+<span class="n">dist-scale-factor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">80</span>
 <span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">                                    </span><span class="c1"># Enable labels (default false for curves)</span>
 </pre></div>
 </div>
@@ -479,11 +479,11 @@ possible option in each section, see the <a class="reference internal" href="opt
 <p>Note the double brackets which make each “surface” entry part of a list to iterate over</p>
 <div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[[surface]]</span><span class="w"> </span>
 <span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;./ahn.tif&quot;</span>
-<span class="n">style_kwds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;k&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="p">=</span><span class="w">  </span><span class="s2">&quot;Present surface&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="n">style-kwds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;k&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="p">=</span><span class="w">  </span><span class="s2">&quot;Present surface&quot;</span><span class="w"> </span><span class="p">}</span>
 
 <span class="k">[[surface]]</span>
 <span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;./basis_holoceen.img&quot;</span>
-<span class="n">style_kwds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;r&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linestyle</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;--&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="p">=</span><span class="w">  </span><span class="s2">&quot;Holocene base (GeoTOP)&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="n">style-kwds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;r&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">linestyle</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;--&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="p">=</span><span class="w">  </span><span class="s2">&quot;Holocene base (GeoTOP)&quot;</span><span class="w"> </span><span class="p">}</span>
 </pre></div>
 </div>
 </section>

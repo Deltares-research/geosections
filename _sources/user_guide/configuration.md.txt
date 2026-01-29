@@ -10,8 +10,8 @@ possible option in each section, see the [configuration options](./options.md)
 ```toml
 [settings]
 column_width = 20
-fig_width = 11
-fig_height = 7
+fig-width = 11 # Multiple words can be given as 'fig-width' or 'fig_width'
+fig-height = 7
 inches = true
 grid = true
 ```
@@ -23,7 +23,7 @@ grid = true
 file = "./cross_section_lines.geoparquet"       # Also accepts .shp files
 crs = 28992
 name = "E-W"
-name_column = "name"
+name-column = "name"
 ```
 
 ## Borehole data
@@ -31,8 +31,8 @@ name_column = "name"
 ```toml
 [data.boreholes]
 file = "./boreholes.parquet"                    # Also accepts .csv file
-max_distance_to_line = 120
-additional_nrs = ['B48B0396', 'B48B0398']
+max-distance-to-line = 120
+additional-nrs = ['B48B0396', 'B48B0398']
 label = false                                   # Disable text labels
 ```
 
@@ -41,9 +41,9 @@ label = false                                   # Disable text labels
 ```toml
 [data.cpts]
 file = "./cpt_data.parquet"                     # Also accepts .csv file
-max_distance_to_line = 30
+max-distance-to-line = 30
 crs = 4258
-additional_nrs = ['CPT000000244400']
+additional-nrs = ['CPT000000244400']
 label = false                                   # Disable text labels
 ```
 
@@ -57,7 +57,7 @@ nrs = [
     "CPT000000050791",
     "CPT000000008329",
 ]
-dist_scale_factor = 80
+dist-scale-factor = 80
 label = true                                    # Enable labels (default false for curves)
 ```
 
@@ -68,11 +68,11 @@ Note the double brackets which make each "surface" entry part of a list to itera
 ```toml
 [[surface]] 
 file = "./ahn.tif"
-style_kwds = { color = "k", linewidth = 0.5, label =  "Present surface" }
+style-kwds = { color = "k", linewidth = 0.5, label =  "Present surface" }
 
 [[surface]]
 file = "./basis_holoceen.img"
-style_kwds = { color = "r", linestyle = "--", label =  "Holocene base (GeoTOP)" }
+style-kwds = { color = "r", linestyle = "--", label =  "Holocene base (GeoTOP)" }
 ```
 
 ## Cross-section labels
