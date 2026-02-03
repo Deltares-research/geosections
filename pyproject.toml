@@ -53,7 +53,7 @@ path = "src/geosections/__init__.py"
 [tool.hatch.build.targets.sdist]
 only-include = ["src/geosections", "tests"]
 
-[tool.pixi.project]
+[tool.pixi.workspace]
 channels = ["conda-forge"]
 platforms = ["win-64", "linux-64", "osx-64", "osx-arm64"]
 
@@ -99,8 +99,11 @@ python = "3.12.*"
 [tool.pixi.feature.py313.dependencies]
 python = "3.13.*"
 
+[tool.pixi.feature.py314.dependencies]
+python = "3.14.*"
+
 [tool.pixi.environments]
-default = { features = ["py313"], solve-group = "py313" }
+default = { features = ["py314"], solve-group = "py314" }
 py312 = { features = ["py312"], solve-group = "py312" }
 py313 = { features = ["py313"], solve-group = "py313" }
 
@@ -123,7 +126,7 @@ line-length = 88
 
 [tool.ruff]
 line-length = 88
-target-version = "py313"
+target-version = "py314"
 
 [tool.ruff.lint]
 select = ["F", "E", "W", "N", "I001", "NPY201"]
